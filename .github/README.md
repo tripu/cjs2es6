@@ -3,7 +3,10 @@
 _Automatic migration of modules:_ CommonJS → ES6
 
 Copyright © 2016–2022 James J. Womack, Ole Morten Didriksen, luoage, tripu.
-See [the licence](./LICENSE.txt).
+See [the licence](../LICENSE.txt).
+
+[![npm version](https://img.shields.io/npm/v/cjs2es6.svg)](https://npmjs.org/package/cjs2es6)
+[![Licence](https://img.shields.io/npm/l/cjs2es6.svg)](https://github.com/tripu/cjs2es6/blob/master/LICENSE.txt)
 
 ## Prerequisites
 

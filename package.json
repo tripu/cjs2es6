@@ -57,7 +57,7 @@
   "bugs": {
     "url": "https://github.com/tripu/cjs2es6/issues"
   },
-  "homepage": "https://github.com/tripu/cjs2es6",
+  "homepage": "https://github.com/tripu/cjs2es6/blob/master/.github/README.md",
   "dependencies": {
     "globby": "^13.1.2"
   },
@@ -65,7 +65,7 @@
     "clean": "rm -rf test/output/ && cp -r test/input/ test/output/",
     "process-samples": "node . test/output/t*.js test/output/**/*.js && diff -qr test/output test/expected",
     "test": "npm run clean && npm run process-samples",
-    "prepack": "cp .github/README.md .github/LICENSE.txt ./",
-    "postpack": "rm -f README.md LICENSE.txt"
+    "prepack": "cp .github/README.md ./",
+    "postpack": "rm -f README.md"
   }
 }
