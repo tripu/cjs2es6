@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const FS     = require('fs')
-const globby = require('globby')
-const path = require('path')
+import {statSync, writeFileSync, readFileSync} from 'fs'
+import {globby} from 'globby'
+import {basename, extname} from 'path'
 
 // const createStore = require('redux')
 const r1     = /^(let|var|const)\s+(\S+)\s+\=\s+require\((\S+)\)/gm
@@ -29,25 +29,25 @@ if (!args.length) {
 }
 
 const ignores = ['node_modules']
-const paths = globby.sync(args)
+const paths = await globby(args)
 
 paths.forEach(function (p) {
   return replaceInFile(p)
 })
 
 function replaceInFile(fp) {
-  if (ignores.includes(path.basename(fp))) {
+  if (ignores.includes(basename(fp))) {
     return
   }
-  if (FS.statSync(fp).isDirectory()) {
-    globby.sync(`${fp}/*`).forEach((p1) => {
+  if (statSync(fp).isDirectory()) {
+    globby(`${fp}/*`).forEach((p1) => {
       return replaceInFile(p1)
     })
   }
-  if (!/^\.m*js$/.test(path.extname(fp))) {
+  if (!/^\.m?[j|t]sx?$/.test(extname(fp))) {
     return
   }
-  const result = FS.writeFileSync(fp, FS.readFileSync(fp, 'utf-8')
+  const result = writeFileSync(fp, readFileSync(fp, 'utf-8')
     .replace(r8, `import { fileURLToPath } from 'url';\nconst __filename = fileURLToPath(import.meta.url);\n$1__filename`)
     .replace(r6, `export default `)
     .replace(r5, `export const $2 = `)
